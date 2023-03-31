@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fragoso.helpdesk.domain.Tecnico;
+import com.fragoso.helpdesk.domain.dtos.TecnicoDTO;
 import com.fragoso.helpdesk.repositories.TecnicoRepository;
 import com.fragoso.helpdesk.services.exceptions.ObjectnotFoundException;
 
@@ -24,5 +25,11 @@ public class TecnicoService {
 	public List<Tecnico> findAll() {
 		// TODO Auto-generated method stub
 		return repository.findAll();
+	}
+
+	public Tecnico create(TecnicoDTO objDTO) {
+		objDTO.setId(null);
+		Tecnico newObj = new Tecnico(objDTO);
+		return repository.save(newObj);
 	}
 }
