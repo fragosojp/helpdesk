@@ -1,6 +1,5 @@
 package com.fragoso.helpdesk.services;
 
-import java.io.Console;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +13,8 @@ import com.fragoso.helpdesk.repositories.PessoaRepository;
 import com.fragoso.helpdesk.repositories.TecnicoRepository;
 import com.fragoso.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.fragoso.helpdesk.services.exceptions.ObjectnotFoundException;
+
+import jakarta.validation.Valid;
 
 @Service
 public class TecnicoService {
@@ -41,6 +42,15 @@ public class TecnicoService {
 		return repository.save(newObj);
 	}
 
+	public Tecnico upadate(Integer id, @Valid TecnicoDTO objDTO) {
+		objDTO.setId(id);
+		Tecnico oldObj = findById(id);
+		validaPorCpfEmail(objDTO);
+		oldObj = new Tecnico(objDTO);
+		return repository.save(oldObj);
+		
+	}
+	
 	private void validaPorCpfEmail(TecnicoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
 		if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
