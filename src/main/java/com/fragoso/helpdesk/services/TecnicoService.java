@@ -52,13 +52,13 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
 		}
 		
-		Optional<Pessoa> obj_Cpf = pessoaRepository.findByCpf(objDTO.getCpf());	
-		Optional<Pessoa> obj_Email = pessoaRepository.findByEmail(objDTO.getEmail());	
-		
-		if(obj_Cpf.isPresent() && obj_Cpf.get().getId() != objDTO.getId() && 
-		   obj_Email.isPresent() && obj_Email.get().getId() != objDTO.getId() ) {
-			throw new DataIntegrityViolationException("CPF E Email já cadastrado no sistema!");
-		}
+//		Optional<Pessoa> obj_Cpf = pessoaRepository.findByCpf(objDTO.getCpf());	
+//		Optional<Pessoa> obj_Email = pessoaRepository.findByEmail(objDTO.getEmail());	
+//		
+//		if(obj_Cpf.isPresent() && obj_Cpf.get().getId() != objDTO.getId() && 
+//		   obj_Email.isPresent() && obj_Email.get().getId() != objDTO.getId() ) {
+//			throw new DataIntegrityViolationException("CPF E Email já cadastrado no sistema!");
+//		}
 		
 	}
 }
